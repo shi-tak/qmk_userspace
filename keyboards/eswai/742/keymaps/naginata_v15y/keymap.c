@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
-#include "os_detection.h"
+// #include "os_detection.h"
 #include "twpair_on_jis.h"
 #include "print.h"
 
@@ -44,7 +44,7 @@ enum custom_keycodes {
 };
 
 uint32_t oled_sleep_timer;
-uint32_t naginata_timer;
+// uint32_t naginata_timer;
 // static deferred_token my_token;
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -85,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_ADJUST] = LAYOUT(
     _______,EE_CLR ,QK_BOOT,KC_F1   ,KC_F2  ,KC_F3   ,KC_F4,  NG_TAYO,NGSW_WIN,XXXXXXX,XXXXXXX,QK_BOOT,XXXXXXX,_______, \
-    _______,XXXXXXX,KC_SLEP,KC_F5   ,KC_F6  ,KC_F7   ,KC_F8,  NG_KOTI,NGSW_MAC,NG_MLV ,XXXXXXX,XXXXXXX,XXXXXXX,_______, \
+    _______,XXXXXXX,KC_SLEP,KC_F5   ,KC_F6  ,KC_F7   ,KC_F8,  XXXXXXX,NGSW_MAC,XXXXXXX ,XXXXXXX,XXXXXXX,XXXXXXX,_______, \
     _______,XXXXXXX,KC_WAKE,KC_F9   ,KC_F10 ,KC_F11  ,KC_F12, NG_SHOS,NGSW_LNX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,_______, \
     _______,_______,_______,_______,_______,     XXXXXXX,        XXXXXXX,_______,_______,_______,_______,_______
   ),
@@ -115,22 +115,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   #endif
 
   switch (keycode) {
-    case EISUON:
-      if (record->event.pressed) {
-        // 薙刀式
-        naginata_off();
-        // 薙刀式
-      }
-      return false;
-      break;
-    case KANAON:
-      if (record->event.pressed) {
-        // 薙刀式
-        naginata_on();
-        // 薙刀式
-      }
-      return false;
-      break;
+    // case EISUON:
+    //   if (record->event.pressed) {
+    //     // 薙刀式
+    //     naginata_off();
+    //     // 薙刀式
+    //   }
+    //   return false;
+    //   break;
+    // case KANAON:
+    //   if (record->event.pressed) {
+    //     // 薙刀式
+    //     naginata_on();
+    //     // 薙刀式
+    //   }
+    //   return false;
+    //   break;
     case PASTE: // VS Codeのプチフリ対策
       if (record->event.pressed) {
         register_code(KC_LCMD);
@@ -166,25 +166,25 @@ void keyboard_post_init_user(void) {
   set_naginata(_NAGINATA, ngonkeys, ngoffkeys);
   // 薙刀式
 
-  wait_ms(400);
-  switch (detected_host_os()) {
-    case OS_WINDOWS:
-      layer_move(_WIN);
-      switchOS(NG_WIN);
-      break;
-    case OS_MACOS:
-    case OS_IOS:
-      layer_move(_MAC);
-      switchOS(NG_MAC);
-      break;
-    case OS_LINUX:
-      layer_move(_WIN);
-      switchOS(NG_LINUX);
-      break;
-    default:
-      layer_move(_WIN);
-      switchOS(NG_WIN);
-  }
+  // wait_ms(400);
+  // switch (detected_host_os()) {
+  //   case OS_WINDOWS:
+  //     layer_move(_WIN);
+  //     switchOS(NG_WIN);
+  //     break;
+  //   case OS_MACOS:
+  //   case OS_IOS:
+  //     layer_move(_MAC);
+  //     switchOS(NG_MAC);
+  //     break;
+  //   case OS_LINUX:
+  //     layer_move(_WIN);
+  //     switchOS(NG_LINUX);
+  //     break;
+  //   default:
+  //     layer_move(_WIN);
+  //     switchOS(NG_WIN);
+  // }
 
   // my_token = defer_exec(NAGINATA_TIMEOUT, kanaoff, NULL);
 }
@@ -233,12 +233,12 @@ static void render_mode(void) {
     } else {
       delete_char(128 + 5, 7);
     }
-    if (!naginata_config.kouchi_shift) {
+    // if (!naginata_config.kouchi_shift) {
       delete_char(2 * 128 + 5, 7);
-    }
-    if (!naginata_config.live_conv) {
+    // }
+    // if (!naginata_config.live_conv) {
       delete_char(3 * 128 + 5, 7);
-    }
+    // }
 }
 
 static void render_kana(void) {
@@ -318,7 +318,7 @@ static void render_eisu(void) {
 }
 
 bool oled_task_user(void) {
-    // なぜかマスター側は明示的にOLEDのスリープ処理が必要
+    // なぜかマスター側は明示的にOLEDのスリープ処理が必要 -> delete_charで書き換えてるから
     if (is_keyboard_master()) {
       if (timer_expired32(timer_read32(), oled_sleep_timer)) {
         if (is_oled_on()) {
