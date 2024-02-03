@@ -84,7 +84,7 @@ CMD_T(KC_ESC) ,KC_W     ,KC_I    ,KC_S    ,KC_A    ,KC_G    ,KC_Y    ,KC_E    ,K
 //            ,         ,        ,        ,        ,        ,        ,        ,        ,        ,        ,        ,        ,        ,        ,
 	    XXXXXXX ,XXXXXXX  ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX , \
       XXXXXXX ,EE_CLR   ,QK_BOOT ,XXXXXXX ,XXXXXXX ,XXXXXXX ,NG_TAYO ,NGSW_WIN,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX , \
-      XXXXXXX ,XXXXXXX  ,KC_SLEP ,XXXXXXX ,XXXXXXX ,XXXXXXX ,NG_KOTI ,NGSW_MAC,NG_MLV  ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX , \
+      XXXXXXX ,XXXXXXX  ,KC_SLEP ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,NGSW_MAC,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX , \
       XXXXXXX ,XXXXXXX  ,KC_WAKE ,XXXXXXX ,XXXXXXX ,XXXXXXX ,NG_SHOS ,NGSW_LNX,XXXXXXX, XXXXXXX, XXXXXXX  ,XXXXXXX ,XXXXXXX ,XXXXXXX, \
 		  _______ ,_______  ,_______          ,_______          ,_______          ,_______          ,_______ ,XXXXXXX ,XXXXXXX ,XXXXXXX
   ),
