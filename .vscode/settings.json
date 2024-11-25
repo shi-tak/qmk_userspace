@@ -1,0 +1,8 @@
+{
+  "C_Cpp.formatting": "clangFormat",
+  "C_Cpp.clang_format_path": "./can",
+  "files.associations": {
+    "*.html.erb": "html",
+    "twpair_on_jis.h": "c"
+  }
+}
