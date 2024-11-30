@@ -17,7 +17,6 @@
 #include QMK_KEYBOARD_H
 #include "os_detection.h"
 #include "keymap_japanese.h"
-#include "twpair_on_jis.h"
 
 // 薙刀式
 #include "naginata.h"
@@ -26,83 +25,76 @@ NGKEYS naginata_keys;
 // 薙刀式
 
 enum layer_names {
-    _QWERTY,
-    _LOWER,
-    _RAISE,
-    // 薙刀式
-    _NAGINATA, // 薙刀式入力レイヤー
-               // 薙刀式
-    _CONTROL,
-    _SYMBOL1,
-    _SYMBOL2,
-    _NUMBER,
-    _FUNC,
-    _OTHER,
+  _QWERTY,  
+  // 薙刀式
+  _NAGINATA, // 薙刀式入力レイヤー
+  // 薙刀式
+  _CTRL,
+  _SYM1,
+  _SYM2,
+  _NUM,
+  _FNC,
+  _OTHR
 };
 
 // Defines the keycodes used by our macros in process_record_user
-enum custom_keycodes { QWERTY = NG_SAFE_RANGE, LOWER, RAISE, CONTROL, SYMBOL1, SYMBOL2, NUMBER, FUNC, OTHER };
+enum custom_keycodes {
+    KANAON = NG_SAFE_RANGE,
+    EISUON,
+};
 
-uint32_t              naginata_timer;
 static deferred_token my_token;
+
+#define CTLSPC CTL_T(KC_SPC)
+#define SFTENT SFT_T(KC_ENT)
+#define COPY LCTL(KC_C)
+#define CUT LCTL(KC_X)
+#define PASTE LCTL(KC_V)
+#define FIND LCTL(KC_F)
+#define SELALL LCTL(KC_A)
+#define BACK LCTL(KC_Z)
+#define SAVE LCTL(KC_S)
+#define REDO LCTL(KC_Y)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_QWERTY] = LAYOUT_split_3x5_3(
-  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,       KC_Y,    KC_U,   KC_I,    KC_O,    KC_P,
-  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,       KC_H,    KC_J,   KC_K,    KC_L,    KC_BSPC,
-  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M,   KC_COMM, KC_DOT,  KC_ESC,
-                    CONTROL, LOWER, KC_SPC,       KC_ENT,  RAISE,  NUMBER
+  KC_Q,    KC_W,    KC_E,    KC_R,      KC_T,      KC_Y,    KC_U,     KC_I,    KC_O,    KC_P,
+  KC_A,    KC_S,    KC_D,    KC_F,      KC_G,      KC_H,    KC_J,     KC_K,    KC_L,    KC_BSPC,
+  KC_Z,    KC_X,    KC_C,    KC_V,      KC_B,      KC_N,    KC_M,     KC_COMM, KC_DOT,  KC_ESC,
+                    KC_LGUI, MO(_CTRL), CTLSPC,    SFTENT,  MO(_NUM), KC_RALT
 ),
 
-[_LOWER] = LAYOUT_split_3x5_3(
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      _______, _______, _______, _______, _______,
-  KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,      _______, _______, _______, _______, _______,
-  XXXXXXX, XXXXXXX, SYMBOL2, SYMBOL1, XXXXXXX,      _______, _______, _______, _______, _______,
-                    _______, _______, _______,      _______, _______, _______
+[_CTRL] = LAYOUT_split_3x5_3(
+  SELALL,  CUT,     COPY,      PASTE,     XXXXXXX,  KC_PGUP, KC_PGDN, KC_HOME, KC_END,  JP_AT,
+  KC_LGUI, KC_LALT, KC_LCTL,   KC_LSFT,   XXXXXXX,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, JP_SCLN,
+  BACK,    REDO,    MO(_SYM2), MO(_SYM1), XXXXXXX,  KC_CAPS, KC_TAB,  KC_DEL,  JP_UNDS, JP_COLN,
+                    _______,   _______,   _______,  _______, _______, _______
 ),
 
-
-[_RAISE] =  LAYOUT_split_3x5_3(
-  _______, _______, _______, _______, _______,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  _______, _______, _______, _______, _______,    XXXXXXX, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI,
-  _______, _______, _______, _______, _______,    XXXXXXX, FUNC,    OTHER,   XXXXXXX, XXXXXXX,
-                    _______, _______, _______,    _______, _______, _______
+[_SYM1] = LAYOUT_split_3x5_3(
+  _______, _______, _______, _______, _______,     JP_EXLM, JP_DQUO, JP_HASH, JP_DLR,  JP_PERC,
+  _______, _______, _______, _______, _______,     JP_AMPR, JP_QUOT, JP_EQL,  JP_TILD, JP_PIPE,
+  _______, _______, _______, _______, _______,     JP_GRV,  JP_CIRC, JP_QUES, JP_SLSH, JP_BSLS,
+                    _______, _______, _______,     _______, _______, _______
 ),
 
-[_CONTROL] = LAYOUT_split_3x5_3(
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      KC_HOME, KC_END,  KC_PGUP,  KC_PGDN, JP_AT,
-  KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,      KC_LEFT, KC_DOWN, KC_UP,    KC_RGHT, JP_SCLN,
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      KC_CAPS, KC_TAB,  KC_DEL,   JP_UNDS, JP_COLN,
-                    _______, _______, _______,      _______, _______, _______
+[_SYM2] = LAYOUT_split_3x5_3(
+  _______, _______, _______, _______, _______,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  _______, _______, _______, _______, _______,     XXXXXXX, JP_LPRN, JP_LBRC, JP_LCBR, JP_LABK,
+  _______, _______, _______, _______, _______,     XXXXXXX, JP_RPRN, JP_RBRC, JP_RCBR, JP_RABK,
+                    _______, _______, _______,     _______, _______, _______
 ),
 
-[_SYMBOL1] = LAYOUT_split_3x5_3(
-  _______, _______, _______, _______, _______,      JP_EXLM, JP_DQUO, JP_HASH, JP_DLR,  JP_PERC,
-  _______, _______, _______, _______, _______,      JP_AMPR, JP_QUOT, JP_EQL,  JP_TILD, JP_PIPE,
-  _______, _______, _______, _______, _______,      JP_GRV,  JP_CIRC, JP_QUES, JP_SLSH, JP_BSLS,
-                    _______, _______, _______,      _______,  _______, _______
-),
-
-[_SYMBOL2] = LAYOUT_split_3x5_3(
-  _______, _______, _______, _______, _______,      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  _______, _______, _______, _______, _______,      XXXXXXX, JP_LPRN, JP_LBRC, JP_LCBR, JP_LABK,
-  _______, _______, _______, _______, _______,      XXXXXXX, JP_RPRN, JP_RBRC, JP_RCBR, JP_RABK,
-                    _______, _______, _______,      _______,  _______, _______
+[_NUM] =  LAYOUT_split_3x5_3(
+  JP_ASTR, KC_7,    KC_8,    KC_9,    JP_MINS,    XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX, XXXXXXX,
+  JP_SLSH, KC_4,    KC_5,    KC_6,    JP_PLUS,    XXXXXXX,  KC_RSFT,   KC_RCTL,   KC_RALT, KC_RGUI,
+  KC_0,    KC_1,    KC_2,    KC_3,    JP_DOT,     XXXXXXX,  MO(_FNC),  MO(_OTHR), XXXXXXX, XXXXXXX,
+                    _______, _______, _______,    _______,   _______, _______
 ),
 
 
-
-
-[_NUMBER] =  LAYOUT_split_3x5_3(
-  JP_ASTR, KC_7,    KC_8,    KC_9,    JP_MINS,    XXXXXXX, FUNC,    OTHER,   XXXXXXX, XXXXXXX,
-  JP_SLSH, KC_4,    KC_5,    KC_6,    JP_PLUS,    XXXXXXX, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI,
-  KC_0,    KC_1,    KC_2,    KC_3,    KC_DOT,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-                    _______, _______, _______,    _______, _______, _______
-),
-
-
-[_FUNC] =  LAYOUT_split_3x5_3(
+[_FNC] =  LAYOUT_split_3x5_3(
   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,      _______, _______, _______, _______, _______,
   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,     _______, _______, _______, _______, _______,
   KC_F11,  KC_F12,  XXXXXXX, XXXXXXX, XXXXXXX,    _______, _______, _______, _______, _______,
@@ -110,22 +102,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 
-[_OTHER] =  LAYOUT_split_3x5_3(
+[_OTHR] =  LAYOUT_split_3x5_3(
   NGSW_MAC, NGSW_WIN, NG_SHOS, NG_TAYO, XXXXXXX,   _______, _______, _______, _______, _______,
   KC_INS,   KC_PSCR,  KC_SCRL, KC_NUM,  XXXXXXX,   _______, _______, _______, _______, _______,
   JP_KANA,  JP_ZKHK,  JP_MHEN, JP_HENK, XXXXXXX,   _______, _______, _______, _______, _______,
-                    _______, _______,  _______,    _______, _______, _______
+                      _______, _______, _______,   _______, _______, _______
 ),
 
+
+
 // 薙刀式
-  [_NAGINATA] = LAYOUT_split_3x5_3(
-    NG_Q   ,NG_W   ,NG_E   ,NG_R   ,NG_T   ,          NG_Y   ,NG_U   ,NG_I   ,NG_O   ,NG_P   , \
-    NG_A   ,NG_S   ,NG_D   ,NG_F   ,NG_G   ,          NG_H   ,NG_J   ,NG_K   ,NG_L   ,NG_SCLN, \
-    NG_Z   ,NG_X   ,NG_C   ,NG_V   ,NG_B   ,          NG_N   ,NG_M   ,NG_COMM,NG_DOT ,NG_SLSH, \
-                    _______,_______,NG_SHFT,          NG_SHFT2,_______,_______
-  ),
+[_NAGINATA] = LAYOUT_split_3x5_3(
+  NG_Q,   NG_W,   NG_E,    NG_R,    NG_T,          NG_Y,     NG_U,    NG_I,    NG_O,   NG_P, 
+  NG_A,   NG_S,   NG_D,    NG_F,    NG_G,          NG_H,     NG_J,    NG_K,    NG_L,   NG_SCLN,
+  NG_Z,   NG_X,   NG_C,    NG_V,    NG_B,          NG_N,     NG_M,    NG_COMM, NG_DOT, NG_SLSH,
+                  _______, _______, NG_SHFT,       NG_SHFT2, _______, _______
+),
 // 薙刀式
-}op;
+};
 
 uint32_t kanaoff(uint32_t trigger_time, void *cb_arg) {
     if (naginata_state()) naginata_off();
@@ -133,87 +127,33 @@ uint32_t kanaoff(uint32_t trigger_time, void *cb_arg) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    extend_deferred_exec(my_token, NAGINATA_TIMEOUT);
+  extend_deferred_exec(my_token, NAGINATA_TIMEOUT);
 
-    switch (keycode) {
-        case QWERTY:
-            if (record->event.pressed) {
-                // persistant_default_layer_set(1UL<<_QWERTY);
-                set_single_persistent_default_layer(_QWERTY);
-            }
-            return false;
-            break;
-        case LOWER:
-            if (record->event.pressed) {
-                layer_on(_LOWER);
-            } else {
-                layer_off(_LOWER);
-            }
-            return false;
-            break;
-        case RAISE:
-            if (record->event.pressed) {
-                layer_on(_RAISE);
-            } else {
-                layer_off(_RAISE);
-            }
-            return false;
-            break;
-        case CONTROL:
-            if (record->event.pressed) {
-                layer_on(_CONTROL);
-            } else {
-                layer_off(_CONTROL);
-            }
-            return false;
-            break;
-        case SYMBOL1:
-            if (record->event.pressed) {
-                layer_on(_SYMBOL1);
-            } else {
-                layer_off(_SYMBOL1);
-            }
-            return false;
-            break;
-        case SYMBOL2:
-            if (record->event.pressed) {
-                layer_on(_SYMBOL2);
-            } else {
-                layer_off(_SYMBOL2);
-            }
-            return false;
-            break;
-        case NUMBER:
-            if (record->event.pressed) {
-                layer_on(_NUMBER);
-            } else {
-                layer_off(_NUMBER);
-            }
-            return false;
-            break;
-        case FUNC:
-            if (record->event.pressed) {
-                layer_on(_FUNC);
-            } else {
-                layer_off(_FUNC);
-            }
-            return false;
-            break;
-        case OTHER:
-            if (record->event.pressed) {
-                layer_on(_OTHER);
-            } else {
-                layer_off(_OTHER);
-            }
-            return false;
-            break;
-    }
+  switch (keycode) {
+    case EISUON:
+      if (record->event.pressed) {
+        // 薙刀式
+        naginata_off();
+        // 薙刀式
+      }
+      return false;
+      break;
+    case KANAON:
+      if (record->event.pressed) {
+        // 薙刀式
+        naginata_on();
+        // 薙刀式
+      }
+      return false;
+      break;
+  }
 
-    // 薙刀式
-    if (!process_naginata(keycode, record)) return false;
-    // 薙刀式
+  // 薙刀式
+  if (!process_naginata(keycode, record))
+    return false;
+  // 薙刀式
 
-    return true;
+  return true;
 }
 
 void keyboard_post_init_user(void) {
