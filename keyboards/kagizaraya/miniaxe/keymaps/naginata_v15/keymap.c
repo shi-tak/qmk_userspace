@@ -66,7 +66,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [_CTRL] = LAYOUT_split_3x5_3(
-  SELALL,  CUT,     COPY,      PASTE,     XXXXXXX,  KC_PGUP, KC_PGDN, KC_HOME, KC_END,  JP_AT,
+  SELALL,  CUT,     COPY,      PASTE,     XXXXXXX,  KC_HOME, KC_PGUP, KC_PGDN, KC_END,  JP_AT,
   KC_LGUI, KC_LALT, KC_LCTL,   KC_LSFT,   XXXXXXX,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, JP_SCLN,
   BACK,    REDO,    MO(_SYM2), MO(_SYM1), XXXXXXX,  KC_CAPS, KC_TAB,  KC_DEL,  JP_UNDS, JP_COLN,
                     _______,   _______,   _______,  _______, _______, _______
