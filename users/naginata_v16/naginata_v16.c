@@ -14,14 +14,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/*
-
-TODO
-キーボードによっては不安定、バッファに文字が残る
-キーを押す順序によって、シェ、チェが出ない（早期確定に入ってしまう）
-
-*/
-
 #include QMK_KEYBOARD_H
 #include "nglist.h"
 #include "nglistarray.h"
@@ -152,7 +144,7 @@ const PROGMEM naginata_kanamap ngdickana[] = {
   {.shift = 0UL        , .douji = B_M             , .kana = "na"     , .func = nofunc }, // な
   {.shift = B_SHFT     , .douji = B_D             , .kana = "ni"     , .func = nofunc }, // に
   {.shift = B_SHFT     , .douji = B_W             , .kana = "nu"     , .func = nofunc }, // ぬ
-  {.shift = B_SHFT     , .douji = B_R             , .kana = "ne"     , .func = nofunc }, // ね
+  {.shift = B_SHFT     , .douji = B_COMM          , .kana = "ne"     , .func = nofunc }, // ね
   {.shift = B_SHFT     , .douji = B_J             , .kana = "no"     , .func = nofunc }, // の
   {.shift = 0UL        , .douji = B_C             , .kana = "ha"     , .func = nofunc }, // は
   {.shift = 0UL        , .douji = B_X             , .kana = "hi"     , .func = nofunc }, // ひ
@@ -162,9 +154,9 @@ const PROGMEM naginata_kanamap ngdickana[] = {
   {.shift = 0UL        , .douji = B_Z             , .kana = "ho"     , .func = nofunc }, // ほ
   {.shift = B_SHFT     , .douji = B_Z             , .kana = "ho"     , .func = nofunc }, // ほ
   {.shift = B_SHFT     , .douji = B_F             , .kana = "ma"     , .func = nofunc }, // ま
-  {.shift = B_SHFT     , .douji = B_B             , .kana = "mi"     , .func = nofunc }, // み
-  {.shift = B_SHFT     , .douji = B_COMM          , .kana = "mu"     , .func = nofunc }, // む
-  {.shift = B_SHFT     , .douji = B_S             , .kana = "me"     , .func = nofunc }, // め
+  {.shift = B_SHFT     , .douji = B_S             , .kana = "mi"     , .func = nofunc }, // み
+  {.shift = B_SHFT     , .douji = B_B             , .kana = "mu"     , .func = nofunc }, // む
+  {.shift = B_SHFT     , .douji = B_R             , .kana = "me"     , .func = nofunc }, // め
   {.shift = B_SHFT     , .douji = B_K             , .kana = "mo"     , .func = nofunc }, // も
   {.shift = B_SHFT     , .douji = B_H             , .kana = "ya"     , .func = nofunc }, // や
   {.shift = B_SHFT     , .douji = B_P             , .kana = "yu"     , .func = nofunc }, // ゆ
@@ -201,8 +193,7 @@ const PROGMEM naginata_kanamap ngdickana[] = {
   {.shift = 0UL        , .douji = B_F|B_SCLN      , .kana = "bu"     , .func = nofunc }, // ぶ
   {.shift = 0UL        , .douji = B_F|B_P         , .kana = "be"     , .func = nofunc }, // べ
   {.shift = 0UL        , .douji = B_J|B_Z         , .kana = "bo"     , .func = nofunc }, // ぼ
-  {.shift = 0UL        , .douji = B_Q             , .kana = "vu"     , .func = nofunc }, // ゔ
-  {.shift = B_SHFT     , .douji = B_Q             , .kana = "vu"     , .func = nofunc }, // ゔ
+  {.shift = 0UL        , .douji = B_F|B_L|B_SCLN  , .kana = "vu"     , .func = nofunc }, // ゔ
 
   // 半濁音
   {.shift = 0UL        , .douji = B_M|B_C         , .kana = "pa"     , .func = nofunc }, // ぱ
@@ -256,16 +247,16 @@ const PROGMEM naginata_kanamap ngdickana[] = {
   {.shift = 0UL        , .douji = B_M|B_X|B_H     , .kana = "pya"    , .func = nofunc }, // ぴゃ
   {.shift = 0UL        , .douji = B_M|B_X|B_P     , .kana = "pyu"    , .func = nofunc }, // ぴゅ
   {.shift = 0UL        , .douji = B_M|B_X|B_I     , .kana = "pyo"    , .func = nofunc }, // ぴょ
-  {.shift = 0UL        , .douji = B_B|B_H         , .kana = "mya"    , .func = nofunc }, // みゃ
-  {.shift = 0UL        , .douji = B_B|B_P         , .kana = "myu"    , .func = nofunc }, // みゅ
-  {.shift = 0UL        , .douji = B_B|B_I         , .kana = "myo"    , .func = nofunc }, // みょ
+  {.shift = 0UL        , .douji = B_S|B_H         , .kana = "mya"    , .func = nofunc }, // みゃ
+  {.shift = 0UL        , .douji = B_S|B_P         , .kana = "myu"    , .func = nofunc }, // みゅ
+  {.shift = 0UL        , .douji = B_S|B_I         , .kana = "myo"    , .func = nofunc }, // みょ
   {.shift = 0UL        , .douji = B_E|B_H         , .kana = "rya"    , .func = nofunc }, // りゃ
   {.shift = 0UL        , .douji = B_E|B_P         , .kana = "ryu"    , .func = nofunc }, // りゅ
   {.shift = 0UL        , .douji = B_E|B_I         , .kana = "ryo"    , .func = nofunc }, // りょ
 
   // 清音外来音 濁音外来音
   {.shift = 0UL        , .douji = B_M|B_E|B_K     , .kana = "thi"    , .func = nofunc }, // てぃ
-  {.shift = 0UL        , .douji = B_M|B_E|B_P     , .kana = "thu"    , .func = nofunc }, // てゅ
+  {.shift = 0UL        , .douji = B_M|B_E|B_P     , .kana = "texyu"  , .func = nofunc }, // てゅ
   {.shift = 0UL        , .douji = B_J|B_E|B_K     , .kana = "dhi"    , .func = nofunc }, // でぃ
   {.shift = 0UL        , .douji = B_J|B_E|B_P     , .kana = "dhu"    , .func = nofunc }, // でゅ
   {.shift = 0UL        , .douji = B_M|B_D|B_L     , .kana = "toxu"   , .func = nofunc }, // とぅ
@@ -283,11 +274,11 @@ const PROGMEM naginata_kanamap ngdickana[] = {
   {.shift = 0UL        , .douji = B_V|B_L|B_K     , .kana = "wi"     , .func = nofunc }, // うぃ
   {.shift = 0UL        , .douji = B_V|B_L|B_O     , .kana = "we"     , .func = nofunc }, // うぇ
   {.shift = 0UL        , .douji = B_V|B_L|B_N     , .kana = "uxo"    , .func = nofunc }, // うぉ
-  {.shift = 0UL        , .douji = B_M|B_Q|B_J     , .kana = "va"     , .func = nofunc }, // ゔぁ
-  {.shift = 0UL        , .douji = B_M|B_Q|B_K     , .kana = "vi"     , .func = nofunc }, // ゔぃ
-  {.shift = 0UL        , .douji = B_M|B_Q|B_O     , .kana = "ve"     , .func = nofunc }, // ゔぇ
-  {.shift = 0UL        , .douji = B_M|B_Q|B_N     , .kana = "vo"     , .func = nofunc }, // ゔぉ
-  {.shift = 0UL        , .douji = B_M|B_Q|B_P     , .kana = "vuxyu"  , .func = nofunc }, // ゔゅ
+  {.shift = 0UL        , .douji = B_F|B_L|B_J     , .kana = "va"     , .func = nofunc }, // ゔぁ
+  {.shift = 0UL        , .douji = B_F|B_L|B_K     , .kana = "vi"     , .func = nofunc }, // ゔぃ
+  {.shift = 0UL        , .douji = B_F|B_L|B_O     , .kana = "ve"     , .func = nofunc }, // ゔぇ
+  {.shift = 0UL        , .douji = B_F|B_L|B_N     , .kana = "vo"     , .func = nofunc }, // ゔぉ
+  {.shift = 0UL        , .douji = B_F|B_L|B_P     , .kana = "vuxyu"  , .func = nofunc }, // ゔゅ
   {.shift = 0UL        , .douji = B_V|B_H|B_J     , .kana = "kuxa"   , .func = nofunc }, // くぁ
   {.shift = 0UL        , .douji = B_V|B_H|B_K     , .kana = "kuxi"   , .func = nofunc }, // くぃ
   {.shift = 0UL        , .douji = B_V|B_H|B_O     , .kana = "kuxe"   , .func = nofunc }, // くぇ
@@ -302,6 +293,7 @@ const PROGMEM naginata_kanamap ngdickana[] = {
 
   // 追加
   {.shift = 0UL        , .douji = B_SHFT          , .kana = " "      , .func = nofunc },
+  {.shift = 0UL        , .douji = B_Q             , .kana = ""       , .func = nofunc },
   {.shift = B_SHFT     , .douji = B_V             , .kana = ","SS_TAP(X_ENTER)  , .func = nofunc },
   {.shift = B_SHFT     , .douji = B_M             , .kana = "."SS_TAP(X_ENTER)  , .func = nofunc },
   {.shift = 0UL        , .douji = B_U             , .kana = SS_TAP(X_BACKSPACE) , .func = nofunc },
@@ -318,69 +310,66 @@ const PROGMEM naginata_kanamap ngdickana[] = {
   {.shift = 0UL        , .douji = B_F|B_G         , .kana = ""       , .func = naginata_off }, //　かなオフ
 
   // 編集モード
-  {.shift = B_D|B_F    , .douji = B_Y             , .kana = ""       , .func = ngh_DFY }, // {Home}
-  {.shift = B_D|B_F    , .douji = B_U             , .kana = ""       , .func = ngh_DFU }, // +{End}{BS}
-  {.shift = B_D|B_F    , .douji = B_I             , .kana = ""       , .func = ngh_DFI }, // {vk1Csc079}
-  {.shift = B_D|B_F    , .douji = B_O             , .kana = ""       , .func = ngh_DFO }, // {Del}
-  {.shift = B_D|B_F    , .douji = B_P             , .kana = ""       , .func = ngh_DFP }, // {Esc 3}
-  {.shift = B_D|B_F    , .douji = B_H             , .kana = ""       , .func = ngh_DFH }, // {Enter}{End}
-  {.shift = B_D|B_F    , .douji = B_J             , .kana = ""       , .func = ngh_DFJ }, // {↑}
-  {.shift = B_D|B_F    , .douji = B_K             , .kana = ""       , .func = ngh_DFK }, // +{↑}
-  {.shift = B_D|B_F    , .douji = B_L             , .kana = ""       , .func = ngh_DFL }, // +{↑ 7}
-  {.shift = B_D|B_F    , .douji = B_SCLN          , .kana = ""       , .func = ngh_DFSCLN }, // ^i
-  {.shift = B_D|B_F    , .douji = B_N             , .kana = ""       , .func = ngh_DFN }, // {End}
-  {.shift = B_D|B_F    , .douji = B_M             , .kana = ""       , .func = ngh_DFM }, // {↓}
-  {.shift = B_D|B_F    , .douji = B_COMM          , .kana = ""       , .func = ngh_DFCOMM }, // +{↓}
-  {.shift = B_D|B_F    , .douji = B_DOT           , .kana = ""       , .func = ngh_DFDOT }, // +{↓ 7}
-  {.shift = B_D|B_F    , .douji = B_SLSH          , .kana = ""       , .func = ngh_DFSLSH }, // ^u
-
-  {.shift = B_J|B_K    , .douji = B_Q             , .kana = ""       , .func = ngh_JKQ }, // ^{End}
-  {.shift = B_J|B_K    , .douji = B_W             , .kana = ""       , .func = ngh_JKW }, // 『』{改行}{↑}
-  {.shift = B_J|B_K    , .douji = B_E             , .kana = "dhi"    , .func = nofunc  }, // ディ
-  {.shift = B_J|B_K    , .douji = B_R             , .kana = ""       , .func = ngh_JKR }, // ^s
-  {.shift = B_J|B_K    , .douji = B_T             , .kana = ""       , .func = ngh_JKT }, // ・
-  {.shift = B_J|B_K    , .douji = B_A             , .kana = ""       , .func = ngh_JKA }, // ……{改行}
-  {.shift = B_J|B_K    , .douji = B_S             , .kana = ""       , .func = ngh_JKS }, // (){改行}{↑}
-  {.shift = B_J|B_K    , .douji = B_D             , .kana = ""       , .func = ngh_JKD }, // ？{改行}
-  {.shift = B_J|B_K    , .douji = B_F             , .kana = ""       , .func = ngh_JKF }, // 「」{改行}{↑}
-  {.shift = B_J|B_K    , .douji = B_G             , .kana = ""       , .func = ngh_JKG }, // 《》{改行}{↑}
-  {.shift = B_J|B_K    , .douji = B_Z             , .kana = ""       , .func = ngh_JKZ }, // ――{改行}
-  {.shift = B_J|B_K    , .douji = B_X             , .kana = ""       , .func = ngh_JKX }, // 【】{改行}{↑}
-  {.shift = B_J|B_K    , .douji = B_C             , .kana = ""       , .func = ngh_JKC }, // ！{改行}
-  {.shift = B_J|B_K    , .douji = B_V             , .kana = ""       , .func = ngh_JKV }, // {改行}{↓}
-  {.shift = B_J|B_K    , .douji = B_B             , .kana = ""       , .func = ngh_JKB }, // {改行}{←}
-
-  {.shift = B_C|B_V    , .douji = B_Y             , .kana = ""       , .func = ngh_CVY }, // +{Home}
-  {.shift = B_C|B_V    , .douji = B_U             , .kana = ""       , .func = ngh_CVU }, // ^x
-  {.shift = B_C|B_V    , .douji = B_I             , .kana = ""       , .func = ngh_CVI }, // ^v
-  {.shift = B_C|B_V    , .douji = B_O             , .kana = ""       , .func = ngh_CVO }, // ^y
-  {.shift = B_C|B_V    , .douji = B_P             , .kana = ""       , .func = ngh_CVP }, // ^z
-  {.shift = B_C|B_V    , .douji = B_H             , .kana = ""       , .func = ngh_CVH }, // ^c
-  {.shift = B_C|B_V    , .douji = B_J             , .kana = ""       , .func = ngh_CVJ }, // {→}
-  {.shift = B_C|B_V    , .douji = B_K             , .kana = ""       , .func = ngh_CVK }, // +{→}
-  {.shift = B_C|B_V    , .douji = B_L             , .kana = ""       , .func = ngh_CVL }, // +{→ 5}
-  {.shift = B_C|B_V    , .douji = B_SCLN          , .kana = ""       , .func = ngh_CVSCLN }, // +{→ 20}
-  {.shift = B_C|B_V    , .douji = B_N             , .kana = ""       , .func = ngh_CVN }, // +{End}
-  {.shift = B_C|B_V    , .douji = B_M             , .kana = ""       , .func = ngh_CVM }, // {←}
-  {.shift = B_C|B_V    , .douji = B_COMM          , .kana = ""       , .func = ngh_CVCOMM }, // +{←}
-  {.shift = B_C|B_V    , .douji = B_DOT           , .kana = ""       , .func = ngh_CVDOT }, // +{← 5}
-  {.shift = B_C|B_V    , .douji = B_SLSH          , .kana = ""       , .func = ngh_CVSLSH }, // +{← 20}
-
-  {.shift = B_M|B_COMM , .douji = B_Q             , .kana = ""       , .func = ngh_MCQ }, // {Home}{→}{End}{Del 4}{←}
-  {.shift = B_M|B_COMM , .douji = B_W             , .kana = ""       , .func = ngh_MCW }, // ^x『^v』{改行}{Space}+{↑}^x
-  {.shift = B_M|B_COMM , .douji = B_E             , .kana = ""       , .func = ngh_MCE }, // {Home}{改行}{Space 3}{←}
-  {.shift = B_M|B_COMM , .douji = B_R             , .kana = ""       , .func = ngh_MCR }, // {Space 3}
-  {.shift = B_M|B_COMM , .douji = B_T             , .kana = ""       , .func = ngh_MCT }, // 〇{改行}
-  {.shift = B_M|B_COMM , .douji = B_A             , .kana = ""       , .func = ngh_MCA }, // {Home}{→}{End}{Del 2}{←}
-  {.shift = B_M|B_COMM , .douji = B_S             , .kana = ""       , .func = ngh_MCS }, // ^x(^v){改行}{Space}+{↑}^x
-  {.shift = B_M|B_COMM , .douji = B_D             , .kana = ""       , .func = ngh_MCD }, // {Home}{改行}{Space 1}{←}
-  {.shift = B_M|B_COMM , .douji = B_F             , .kana = ""       , .func = ngh_MCF }, // ^x「^v」{改行}{Space}+{↑}^x
-  {.shift = B_M|B_COMM , .douji = B_G             , .kana = ""       , .func = ngh_MCG }, // ^x｜{改行}^v《》{改行}{↑}{Space}+{↑}^x
-  {.shift = B_M|B_COMM , .douji = B_Z             , .kana = ""       , .func = ngh_MCZ }, // 　　　×　　　×　　　×{改行 2}
-  {.shift = B_M|B_COMM , .douji = B_X             , .kana = ""       , .func = ngh_MCX }, // ^x【^v】{改行}{Space}+{↑}^x
-  {.shift = B_M|B_COMM , .douji = B_C             , .kana = ""       , .func = ngh_MCC }, // ／{改行}
-  {.shift = B_M|B_COMM , .douji = B_V             , .kana = ""       , .func = ngh_MCV }, // {改行}{End}{改行}「」{改行}{↑}
-  {.shift = B_M|B_COMM , .douji = B_B             , .kana = ""       , .func = ngh_MCB }, // {改行}{End}{改行}{Space}
+  {.shift = B_J|B_K    , .douji = B_Q     , .kana = "" , .func = ngh_JKQ    }, // ^{End}
+  {.shift = B_J|B_K    , .douji = B_W     , .kana = "" , .func = ngh_JKW    }, // ／{改行}
+  // {.shift = B_J|B_K    , .douji = B_E     , .kana = "" , .func = ngh_JKE    }, // /*ディ*/
+  {.shift = B_J|B_K    , .douji = B_R     , .kana = "" , .func = ngh_JKR    }, // ^s
+  {.shift = B_J|B_K    , .douji = B_T     , .kana = "" , .func = ngh_JKT    }, // ・
+  {.shift = B_J|B_K    , .douji = B_A     , .kana = "" , .func = ngh_JKA    }, // ……{改行}
+  {.shift = B_J|B_K    , .douji = B_S     , .kana = "" , .func = ngh_JKS    }, // 『{改行}
+  {.shift = B_J|B_K    , .douji = B_D     , .kana = "" , .func = ngh_JKD    }, // ？{改行}
+  {.shift = B_J|B_K    , .douji = B_F     , .kana = "" , .func = ngh_JKF    }, // 「{改行}
+  {.shift = B_J|B_K    , .douji = B_G     , .kana = "" , .func = ngh_JKG    }, // ({改行}
+  {.shift = B_J|B_K    , .douji = B_Z     , .kana = "" , .func = ngh_JKZ    }, // ――{改行}
+  {.shift = B_J|B_K    , .douji = B_X     , .kana = "" , .func = ngh_JKX    }, // 』{改行}
+  {.shift = B_J|B_K    , .douji = B_C     , .kana = "" , .func = ngh_JKC    }, // ！{改行}
+  {.shift = B_J|B_K    , .douji = B_V     , .kana = "" , .func = ngh_JKV    }, // 」{改行}
+  {.shift = B_J|B_K    , .douji = B_B     , .kana = "" , .func = ngh_JKB    }, // ){改行}
+  {.shift = B_D|B_F    , .douji = B_Y     , .kana = "" , .func = ngh_DFY    }, // {Home}
+  {.shift = B_D|B_F    , .douji = B_U     , .kana = "" , .func = ngh_DFU    }, // +{End}{BS}
+  {.shift = B_D|B_F    , .douji = B_I     , .kana = "" , .func = ngh_DFI    }, // {vk1Csc079}
+  {.shift = B_D|B_F    , .douji = B_O     , .kana = "" , .func = ngh_DFO    }, // {Del}
+  {.shift = B_D|B_F    , .douji = B_P     , .kana = "" , .func = ngh_DFP    }, // +{Esc 2}
+  {.shift = B_D|B_F    , .douji = B_H     , .kana = "" , .func = ngh_DFH    }, // {Enter}{End}
+  {.shift = B_D|B_F    , .douji = B_J     , .kana = "" , .func = ngh_DFJ    }, // {↑}
+  {.shift = B_D|B_F    , .douji = B_K     , .kana = "" , .func = ngh_DFK    }, // +{↑}
+  {.shift = B_D|B_F    , .douji = B_L     , .kana = "" , .func = ngh_DFL    }, // +{↑ 7}
+  {.shift = B_D|B_F    , .douji = B_SCLN  , .kana = "" , .func = ngh_DFSCLN }, // ^i
+  {.shift = B_D|B_F    , .douji = B_N     , .kana = "" , .func = ngh_DFN    }, // {End}
+  {.shift = B_D|B_F    , .douji = B_M     , .kana = "" , .func = ngh_DFM    }, // {↓}
+  {.shift = B_D|B_F    , .douji = B_COMM  , .kana = "" , .func = ngh_DFCOMM }, // +{↓}
+  {.shift = B_D|B_F    , .douji = B_DOT   , .kana = "" , .func = ngh_DFDOT  }, // +{↓ 7}
+  {.shift = B_D|B_F    , .douji = B_SLSH  , .kana = "" , .func = ngh_DFSLSH }, // ^u
+  {.shift = B_M|B_COMM , .douji = B_Q     , .kana = "" , .func = ngh_MCQ }, // ｜{改行}
+  {.shift = B_M|B_COMM , .douji = B_W     , .kana = "" , .func = ngh_MCW }, // 　　　×　　　×　　　×{改行 2}
+  {.shift = B_M|B_COMM , .douji = B_E     , .kana = "" , .func = ngh_MCE }, // {Home}{→}{End}{Del 2}{←}
+  {.shift = B_M|B_COMM , .douji = B_R     , .kana = "" , .func = ngh_MCR }, // {Home}{改行}{Space 1}{←}
+  {.shift = B_M|B_COMM , .douji = B_T     , .kana = "" , .func = ngh_MCT }, // 〇{改行}
+  {.shift = B_M|B_COMM , .douji = B_A     , .kana = "" , .func = ngh_MCA }, // 《{改行}
+  {.shift = B_M|B_COMM , .douji = B_S     , .kana = "" , .func = ngh_MCS }, // 【{改行}
+  {.shift = B_M|B_COMM , .douji = B_D     , .kana = "" , .func = ngh_MCD }, // {Home}{→}{End}{Del 4}{←}
+  {.shift = B_M|B_COMM , .douji = B_F     , .kana = "" , .func = ngh_MCF }, // {Home}{改行}{Space 3}{←}
+  {.shift = B_M|B_COMM , .douji = B_G     , .kana = "" , .func = ngh_MCG }, // {Space 3}
+  {.shift = B_M|B_COMM , .douji = B_Z     , .kana = "" , .func = ngh_MCZ }, // 》{改行}
+  {.shift = B_M|B_COMM , .douji = B_X     , .kana = "" , .func = ngh_MCX }, // 】{改行}
+  {.shift = B_M|B_COMM , .douji = B_C     , .kana = "" , .func = ngh_MCC }, // 」{改行}{改行}
+  {.shift = B_M|B_COMM , .douji = B_V     , .kana = "" , .func = ngh_MCV }, // 」{改行}{改行}「{改行}
+  {.shift = B_M|B_COMM , .douji = B_B     , .kana = "" , .func = ngh_MCB }, // 」{改行}{改行}{Space}
+  {.shift = B_C|B_V    , .douji = B_Y     , .kana = "" , .func = ngh_CVY    }, // +{Home}
+  {.shift = B_C|B_V    , .douji = B_U     , .kana = "" , .func = ngh_CVU    }, // ^x
+  {.shift = B_C|B_V    , .douji = B_I     , .kana = "" , .func = ngh_CVI    }, // {vk1Csc079}
+  {.shift = B_C|B_V    , .douji = B_O     , .kana = "" , .func = ngh_CVO    }, // ^v
+  {.shift = B_C|B_V    , .douji = B_P     , .kana = "" , .func = ngh_CVP    }, // ^z
+  {.shift = B_C|B_V    , .douji = B_H     , .kana = "" , .func = ngh_CVH    }, // ^c
+  {.shift = B_C|B_V    , .douji = B_J     , .kana = "" , .func = ngh_CVJ    }, // {←}
+  {.shift = B_C|B_V    , .douji = B_K     , .kana = "" , .func = ngh_CVK    }, // {→}
+  {.shift = B_C|B_V    , .douji = B_L     , .kana = "" , .func = ngh_CVL    }, // {改行}{Space}+{Home}^x{BS}
+  {.shift = B_C|B_V    , .douji = B_SCLN  , .kana = "" , .func = ngh_CVSCLN }, // ^y
+  {.shift = B_C|B_V    , .douji = B_N     , .kana = "" , .func = ngh_CVN    }, // +{End}
+  {.shift = B_C|B_V    , .douji = B_M     , .kana = "" , .func = ngh_CVM    }, // +{←}
+  {.shift = B_C|B_V    , .douji = B_COMM  , .kana = "" , .func = ngh_CVCOMM }, // +{→}
+  {.shift = B_C|B_V    , .douji = B_DOT   , .kana = "" , .func = ngh_CVDOT  }, // +{← 7}
+  {.shift = B_C|B_V    , .douji = B_SLSH  , .kana = "" , .func = ngh_CVSLSH }, // +{→ 7}
 
 };
 
@@ -809,7 +798,7 @@ bool process_naginata(uint16_t keycode, keyrecord_t *record) {
           removeFromListArrayAt(&nginput, 0);
         }
       }
-      
+
       #if defined(CONSOLE_ENABLE)
           uprintf("<process_naginata released=%u nginput.size=%u\n", keycode, nginput.size);
       #endif
@@ -1015,13 +1004,12 @@ void ngh_JKQ() { // ^{End}
   ng_eof();
 }
 
-void ngh_JKW() { // 『』{改行}{↑}
-  ng_send_unicode_string_P(PSTR("『』"));
-  ng_up(1);
+void ngh_JKW() { // ／{改行}
+  ng_send_unicode_string_P(PSTR("／"));
 }
 
-// void ngh_JKE() { // ディ
-//   send_string("dhi");
+// void ngh_JKE() { // /*ディ*/
+  
 // }
 
 void ngh_JKR() { // ^s
@@ -1029,55 +1017,47 @@ void ngh_JKR() { // ^s
 }
 
 void ngh_JKT() { // ・
-  ng_send_unicode_string_P(PSTR("・"));
+  tap_code(KC_SLSH);
 }
 
 void ngh_JKA() { // ……{改行}
   ng_send_unicode_string_P(PSTR("……"));
 }
 
-void ngh_JKS() { // (){改行}{↑}
-  ng_send_unicode_string_P(PSTR("（）"));
-  ng_up(1);
+void ngh_JKS() { // 『{改行}
+  ng_send_unicode_string_P(PSTR("『"));
 }
 
 void ngh_JKD() { // ？{改行}
-  tap_code16(LSFT(KC_SLSH));
-  tap_code16(KC_ENT);
+  ng_send_unicode_string_P(PSTR("？"));
 }
 
-void ngh_JKF() { // 「」{改行}{↑}
-  ng_send_unicode_string_P(PSTR("「」"));
-  ng_up(1);
+void ngh_JKF() { // 「{改行}
+  ng_send_unicode_string_P(PSTR("「"));
 }
 
-void ngh_JKG() { // 《》{改行}{↑}
-  ng_send_unicode_string_P(PSTR("《》"));
-  ng_up(1);
+void ngh_JKG() { // ({改行}
+  ng_send_unicode_string_P(PSTR("("));
 }
 
 void ngh_JKZ() { // ――{改行}
   ng_send_unicode_string_P(PSTR("――"));
 }
 
-void ngh_JKX() { // 【】{改行}{↑}
-  ng_send_unicode_string_P(PSTR("【】"));
-  ng_up(1);
+void ngh_JKX() { // 』{改行}
+  ng_send_unicode_string_P(PSTR("』"));
 }
 
 void ngh_JKC() { // ！{改行}
-  tap_code16(LSFT(KC_1));
-  tap_code16(KC_ENT);
+  ng_send_unicode_string_P(PSTR("！"));
 }
 
-void ngh_JKV() { // {改行}{↓}
-  tap_code(KC_ENT);
-  ng_down(1);
+void ngh_JKV() { // 」{改行}
+  ng_send_unicode_string_P(PSTR("」"));
 }
 
-void ngh_JKB() { // {改行}{←}
-  tap_code(KC_ENT);
-  ng_left(1);
+void ngh_JKB() { // ){改行}
+  ng_send_unicode_string_P(PSTR(")"));
 }
 
 void ngh_DFY() { // {Home}
@@ -1099,10 +1079,11 @@ void ngh_DFO() { // {Del}
   tap_code(KC_DEL);
 }
 
-void ngh_DFP() { // {Esc 3}
+void ngh_DFP() { // +{Esc 2}
+  register_code(KC_LSFT);
   tap_code(KC_ESC);
   tap_code(KC_ESC);
-  tap_code(KC_ESC);
+  unregister_code(KC_LSFT);
 }
 
 void ngh_DFH() { // {Enter}{End}
@@ -1154,134 +1135,91 @@ void ngh_DFSLSH() { // ^u
   ng_hiragana();
 }
 
-void ngh_MCQ() { // {Home}{→}{End}{Del 4}{←}
+void ngh_MCQ() { // ｜{改行}
+  ng_send_unicode_string_P(PSTR("｜"));
+}
+
+void ngh_MCW() { // 　　　×　　　×　　　×{改行 2}
+  ng_send_unicode_string_P(PSTR("　　　×　　　×　　　×"));
+  tap_code(KC_ENT);
+  tap_code(KC_ENT);
+}
+
+void ngh_MCE() { // {Home}{→}{End}{Del 2}{←}
   ng_home();
   ng_right(1);
   ng_end();
   tap_code(KC_DEL);
   tap_code(KC_DEL);
-  tap_code(KC_DEL);
-  tap_code(KC_DEL);
   ng_left(1);
 }
 
-void ngh_MCW() { // ^x『^v』{改行}{Space}+{↑}^x
-  ng_cut();
-  ng_send_unicode_string_P(PSTR("『"));
-  ng_paste();
-  ng_send_unicode_string_P(PSTR("』"));
-  tap_code(KC_SPC);
-  register_code(KC_LSFT);
-  ng_up(1);
-  unregister_code(KC_LSFT);
-  ng_cut();
-}
-
-void ngh_MCE() { // {Home}{改行}{Space 3}{←}
+void ngh_MCR() { // {Home}{改行}{Space 1}{←}
   ng_home();
   tap_code(KC_ENT);
   tap_code(KC_SPC);
-  tap_code(KC_SPC);
-  tap_code(KC_SPC);
   ng_left(1);
-}
-
-void ngh_MCR() { // {Space 3}
-  tap_code(KC_SPC);
-  tap_code(KC_SPC);
-  tap_code(KC_SPC);
 }
 
 void ngh_MCT() { // 〇{改行}
   ng_send_unicode_string_P(PSTR("〇"));
 }
 
-void ngh_MCA() { // {Home}{→}{End}{Del 2}{←}
+void ngh_MCA() { // 《{改行}
+  ng_send_unicode_string_P(PSTR("《"));
+}
+
+void ngh_MCS() { // 【{改行}
+  ng_send_unicode_string_P(PSTR("【"));
+}
+
+void ngh_MCD() { // {Home}{→}{End}{Del 4}{←}
   ng_home();
   ng_right(1);
   ng_end();
   tap_code(KC_DEL);
   tap_code(KC_DEL);
+  tap_code(KC_DEL);
+  tap_code(KC_DEL);
   ng_left(1);
 }
 
-void ngh_MCS() { // ^x(^v){改行}{Space}+{↑}^x
-  ng_cut();
-  ng_send_unicode_string_P(PSTR("("));
-  ng_paste();
-  ng_send_unicode_string_P(PSTR(")"));
-  tap_code(KC_SPC);
-  register_code(KC_LSFT);
-  ng_up(1);
-  unregister_code(KC_LSFT);
-  ng_cut();
-}
-
-void ngh_MCD() { // {Home}{改行}{Space 1}{←}
+void ngh_MCF() { // {Home}{改行}{Space 3}{←}
   ng_home();
   tap_code(KC_ENT);
   tap_code(KC_SPC);
+  tap_code(KC_SPC);
+  tap_code(KC_SPC);
   ng_left(1);
 }
 
-void ngh_MCF() { // ^x「^v」{改行}{Space}+{↑}^x
-  ng_cut();
-  ng_send_unicode_string_P(PSTR("「"));
-  ng_paste();
-  ng_send_unicode_string_P(PSTR("」"));
+void ngh_MCG() { // {Space 3}
   tap_code(KC_SPC);
-  register_code(KC_LSFT);
-  ng_up(1);
-  unregister_code(KC_LSFT);
-  ng_cut();
-}
-
-void ngh_MCG() { // ^x｜{改行}^v《》{改行}{↑}{Space}+{↑}^x
-  ng_cut();
-  ng_send_unicode_string_P(PSTR("｜"));
-  ng_paste();
   tap_code(KC_SPC);
-  register_code(KC_LSFT);
-  ng_up(1);
-  unregister_code(KC_LSFT);
-  ng_cut();
-  ng_send_unicode_string_P(PSTR("《》"));
-  ng_up(1);
+  tap_code(KC_SPC);
 }
 
-void ngh_MCZ() { // 　　　×　　　×　　　×{改行 2}
-  ng_send_unicode_string_P(PSTR("　　　×　　　×　　　×"));
-  tap_code(KC_ENT);
-  tap_code(KC_ENT);
+void ngh_MCZ() { // 》{改行}
+  ng_send_unicode_string_P(PSTR("》"));
 }
 
-void ngh_MCX() { // ^x【^v】{改行}{Space}+{↑}^x
-  ng_cut();
-  ng_send_unicode_string_P(PSTR("【"));
-  ng_paste();
+void ngh_MCX() { // 】{改行}
   ng_send_unicode_string_P(PSTR("】"));
-  tap_code(KC_SPC);
-  register_code(KC_LSFT);
-  ng_up(1);
-  unregister_code(KC_LSFT);
-  ng_cut();
 }
 
-void ngh_MCC() { // ／{改行} 
-  ng_send_unicode_string_P(PSTR("／"));
+void ngh_MCC() { // 」{改行}{改行}
+  ng_send_unicode_string_P(PSTR("」"));
+  tap_code(KC_ENT);
 }
 
-void ngh_MCV() { // {改行}{End}{改行}「」{改行}{↑}
+void ngh_MCV() { // 」{改行}{改行}「{改行}
+  ng_send_unicode_string_P(PSTR("」"));
   tap_code(KC_ENT);
-  ng_end();
-  tap_code(KC_ENT);
-  ng_send_unicode_string_P(PSTR("「」"));
-  ng_up(1);
+  ng_send_unicode_string_P(PSTR("「"));
 }
 
-void ngh_MCB() { // {改行}{End}{改行}{Space}
-  tap_code(KC_ENT);
-  ng_end();
+void ngh_MCB() { // 」{改行}{改行}{Space}
+  ng_send_unicode_string_P(PSTR("」"));
   tap_code(KC_ENT);
   tap_code(KC_SPC);
 }
@@ -1296,12 +1234,12 @@ void ngh_CVU() { // ^x
   ng_cut();
 }
 
-void ngh_CVI() { // ^v
-  ng_paste();
+void ngh_CVI() { // {vk1Csc079}
+  ng_saihenkan();
 }
 
-void ngh_CVO() { // ^y
-  ng_redo();
+void ngh_CVO() { // ^v
+  ng_paste();
 }
 
 void ngh_CVP() { // ^z
@@ -1312,26 +1250,26 @@ void ngh_CVH() { // ^c
   ng_copy();
 }
 
-void ngh_CVJ() { // {→}
+void ngh_CVJ() { // {←}
+  ng_left(1);
+}
+
+void ngh_CVK() { // {→}
   ng_right(1);
 }
 
-void ngh_CVK() { // +{→}
+void ngh_CVL() { // {改行}{Space}+{Home}^x{BS}
+  tap_code(KC_ENT);
+  tap_code(KC_SPC);
   register_code(KC_LSFT);
-  ng_right(1);
+  ng_home();
   unregister_code(KC_LSFT);
+  ng_cut();
+  tap_code(KC_BSPC);
 }
 
-void ngh_CVL() { // +{→ 5}
-  register_code(KC_LSFT);
-  ng_right(5);
-  unregister_code(KC_LSFT);
-}
-
-void ngh_CVSCLN() { // +{→ 20}
-  register_code(KC_LSFT);
-  ng_right(20);
-  unregister_code(KC_LSFT);
+void ngh_CVSCLN() { // ^y
+  ng_redo();
 }
 
 void ngh_CVN() { // +{End}
@@ -1340,121 +1278,30 @@ void ngh_CVN() { // +{End}
   unregister_code(KC_LSFT);
 }
 
-void ngh_CVM() { // {←}
-  ng_left(1);
-}
-
-void ngh_CVCOMM() { // +{←}
+void ngh_CVM() { // +{←}
   register_code(KC_LSFT);
   ng_left(1);
   unregister_code(KC_LSFT);
 }
 
-void ngh_CVDOT() { // +{← 5}
+void ngh_CVCOMM() { // +{→}
   register_code(KC_LSFT);
-  ng_left(5);
+  ng_right(1);
   unregister_code(KC_LSFT);
 }
 
-void ngh_CVSLSH() { // +{← 20}
+void ngh_CVDOT() { // +{← 7}
   register_code(KC_LSFT);
-  ng_left(20);
+  ng_left(7);
   unregister_code(KC_LSFT);
 }
 
-// 固有名詞
+void ngh_CVSLSH() { // +{→ 7}
+  register_code(KC_LSFT);
+  ng_right(7);
+  unregister_code(KC_LSFT);
+}
 
-// void ngh_UIW() { // 臨兵闘者皆陣烈在前
-//   ng_send_unicode_string_P(PSTR("臨兵闘者皆陣烈在前"));
-// }
-
-// void ngh_UIE() { // 天狗
-//   ng_send_unicode_string_P(PSTR("天狗"));
-// }
-
-// void ngh_UIR() { // シンイチ
-//   ng_send_unicode_string_P(PSTR("シンイチ"));
-// }
-
-// void ngh_UIT() { // ネムカケ
-//   ng_send_unicode_string_P(PSTR("ネムカケ"));
-// }
-
-// void ngh_UIA() { // 三神
-//   ng_send_unicode_string_P(PSTR("三神"));
-// }
-
-// void ngh_UIS() { // 峯
-//   ng_send_unicode_string_P(PSTR("峯"));
-// }
-
-// void ngh_UID() { // 小鴉
-//   ng_send_unicode_string_P(PSTR("小鴉"));
-// }
-
-// void ngh_UIF() { // 光太郎
-//   ng_send_unicode_string_P(PSTR("光太郎"));
-// }
-
-// void ngh_UIZ() { // 火よ、在れ
-//   ng_send_unicode_string_P(PSTR("火よ、在れ"));
-// }
-
-// void ngh_UIX() { // 火の剣
-//   ng_send_unicode_string_P(PSTR("火の剣"));
-// }
-
-// void ngh_UIC() { // 罵詈雑
-//   ng_send_unicode_string_P(PSTR("罵詈雑"));
-// }
-
-// void ngh_UIV() { // 心の闇
-//   ng_send_unicode_string_P(PSTR("心の闇"));
-// }
-
-// void ngh_ERY() { // 才一
-//   ng_send_unicode_string_P(PSTR("才一"));
-// }
-
-// void ngh_ERU() { // さくら
-//   ng_send_unicode_string_P(PSTR("さくら"));
-// }
-
-// void ngh_ERI() { // 酒田
-//   ng_send_unicode_string_P(PSTR("酒田"));
-// }
-
-// void ngh_ERH() { // 鞍馬
-//   ng_send_unicode_string_P(PSTR("鞍馬"));
-// }
-
-// void ngh_ERJ() { // 青鬼
-//   ng_send_unicode_string_P(PSTR("青鬼"));
-// }
-
-// void ngh_ERK() { // 百地
-//   ng_send_unicode_string_P(PSTR("百地"));
-// }
-
-// void ngh_ERSCLN() { // 不動金縛りの術
-//   ng_send_unicode_string_P(PSTR("不動金縛りの術"));
-// }
-
-// void ngh_ERB() { // 鬼塚
-//   ng_send_unicode_string_P(PSTR("鬼塚"));
-// }
-
-// void ngh_ERN() { // 赤石
-//   ng_send_unicode_string_P(PSTR("赤石"));
-// }
-
-// void ngh_ERM() { // 八幡
-//   ng_send_unicode_string_P(PSTR("八幡"));
-// }
-
-// void ngh_ERDOT() { // 霊槍
-//   ng_send_unicode_string_P(PSTR("霊槍"));
-// }
 
 void ng_cut() {
   switch (naginata_config.os) {
