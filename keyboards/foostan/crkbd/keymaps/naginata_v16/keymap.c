@@ -26,8 +26,7 @@
  #define NAGINATA_TIMEOUT 30000
  
  enum layer_names {
-   _WIN,
-   _MAC,
+   _QWE,
    // 薙刀式
    _NAGINATA, // 薙刀式入力レイヤー
    // 薙刀式
@@ -46,39 +45,32 @@
 
  const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  
- [_WIN] = LAYOUT_split_3x6_3_ex2(
-   KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,     KC_T,   KC_CAPS,     KC_ESC,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_AT,
-   KC_LSFT, KC_A,    KC_S,    KC_D,    KC_F,     KC_G,   KC_DEL,      KC_BSPC, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_COLN,
-   KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,     KC_B,                         KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_BSLS, KC_SLSH,
+ [_QWE] = LAYOUT_split_3x6_3_ex2(
+   KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,     KC_T,   KC_DEL,      KC_ESC,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
+   KC_LSFT, KC_A,    KC_S,    KC_D,    KC_F,     KC_G,   KC_LALT,     KC_RGUI, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_RSFT,
+   KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,     KC_B,                         KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_BSLS, KC_RCTL,
                               KC_LGUI, MO(_LWR), KC_SPC,                       KC_ENT,  MO(_RS),  KC_RALT
  ),
 
- [_MAC] = LAYOUT_split_3x6_3_ex2(
-    KC_TAB, KC_Q,     KC_W,   KC_E,    KC_R,     KC_T,   KC_CAPS,     KC_ESC,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_AT,
-    KC_LSFT, KC_A,    KC_S,   KC_D,    KC_F,     KC_G,   KC_DEL,      KC_BSPC, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_COLN,
-    KC_LCTL, KC_Z,    KC_X,   KC_C,    KC_V,     KC_B,                         KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_BSLS, KC_SLSH,
-                              KC_LGUI, MO(_LWR),   KC_SPC,                       KC_ENT,  MO(_RS),  KC_RALT
- ),
- 
  [_LWR] = LAYOUT_split_3x6_3_ex2(
-   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,     _______, _______, _______, _______, _______, _______, _______,
-   _______, XXXXXXX, KC_LABK, KC_LCBR, KC_LBRC, KC_LPRN, _______,     _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______,
-   _______, XXXXXXX, KC_RABK, KC_RCBR, KC_RBRC, KC_RPRN,                       KC_HOME, KC_PGUP, KC_PGDN, KC_END,  _______, _______,
+   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,     _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+   _______, KC_LABK, KC_LCBR, KC_LBRC, KC_LPRN, XXXXXXX, _______,     _______, XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
+   _______, KC_RABK, KC_RCBR, KC_RBRC, KC_RPRN, XXXXXXX,                       XXXXXXX, KC_HOME, KC_PGUP, KC_PGDN, KC_END,  _______,
                               _______, _______, _______,                       _______, _______, _______
  ),
 
  [_RS] = LAYOUT_split_3x6_3_ex2(
-   _______, KC_ASTR, KC_7,    KC_8,    KC_9,    KC_MINS, _______,     _______, KC_EXLM, KC_DQUO, KC_HASH, KC_DLR,  KC_PERC, _______,
-   _______, KC_SLSH, KC_4,    KC_5,    KC_6,    KC_PLUS, _______,     _______, KC_AMPR, KC_QUOT, KC_EQL,  KC_TILD, KC_PIPE, _______,
-   _______, KC_0,    KC_1,    KC_2,    KC_3,    KC_DOT,                        KC_GRV,  KC_CIRC, KC_QUES, KC_UNDS, _______, _______,
+   _______, KC_ASTR, KC_7,    KC_8,    KC_9,    KC_MINS, _______,     _______, KC_EXLM, KC_DQUO, KC_HASH, KC_DLR,  KC_AMPR, _______,
+   _______, KC_SLSH, KC_4,    KC_5,    KC_6,    KC_PLUS, _______,     _______, KC_QUOT, KC_EQL,  KC_TILD, KC_PIPE, KC_AT,   _______,
+   _______, KC_0,    KC_1,    KC_2,    KC_3,    KC_PERC,                       KC_GRV,  KC_CIRC, KC_QUES, KC_UNDS, KC_COLN, _______,
                               _______, _______, _______,                       _______,  _______, _______
  ),
  
  [_ADJ] =  LAYOUT_split_3x6_3_ex2(
-   NGSW_LNX, XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX, QK_BOOT, _______,     _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______,
-   NGSW_MAC, KC_INS,   KC_PSCR,  KC_SCRL, KC_NUM,  NG_TAYO, _______,     _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______,
-   NGSW_WIN, JP_KANA,  JP_ZKHK,  JP_MHEN, JP_HENK, NG_SHOS,                       KC_F11,  KC_F12,  XXXXXXX, XXXXXXX, XXXXXXX, _______,
-                              _______, _______, _______,                          _______, _______, _______
+  _______, NGSW_LNX, NGSW_MAC, NGSW_WIN, NG_TAYO, NG_SHOS, _______,     _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______,
+  _______, QK_BOOT,  KC_INS,   KC_PSCR,  KC_SCRL, KC_NUM,  _______,     _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______,
+  _______, JP_KANA,  JP_ZKHK,  JP_MHEN,  JP_HENK, KC_CAPS,                       KC_F11,  KC_F12,  XXXXXXX, XXXXXXX, XXXXXXX, _______,
+                               _______,  _______, _______,                       _______, _______, _______
  ),
 
  // 薙刀式
@@ -145,20 +137,16 @@
      wait_ms(400);
      switch (detected_host_os()) {
         case OS_WINDOWS:
-          layer_move(_WIN);
           switchOS(NG_WIN);
           break;
         case OS_MACOS:
         case OS_IOS:
-          layer_move(_MAC);
           switchOS(NG_MAC);
           break;
         case OS_LINUX:
-          layer_move(_WIN);
           switchOS(NG_LINUX);
           break;
         default:
-          layer_move(_WIN);
           switchOS(NG_WIN);
       }
    
