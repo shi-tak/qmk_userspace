@@ -54,8 +54,8 @@
 
  [_LWR] = LAYOUT_split_3x6_3_ex2(
    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,     _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
-   _______, KC_LABK, KC_LCBR, KC_LBRC, KC_LPRN, XXXXXXX, _______,     _______, XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
-   _______, KC_RABK, KC_RCBR, KC_RBRC, KC_RPRN, XXXXXXX,                       XXXXXXX, KC_HOME, KC_PGUP, KC_PGDN, KC_END,  _______,
+   _______, KC_LABK, KC_LCBR, KC_LBRC, KC_LPRN, XXXXXXX, _______,     _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX, _______,
+   _______, KC_RABK, KC_RCBR, KC_RBRC, KC_RPRN, XXXXXXX,                       KC_HOME, KC_PGUP, KC_PGDN, KC_END,  XXXXXXX, _______,
                               _______, _______, _______,                       _______, _______, _______
  ),
 
