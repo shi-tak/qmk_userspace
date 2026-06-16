@@ -1,4 +1,0 @@
-LTO_ENABLE = yes
-OS_DETECTION_ENABLE = yes
-DEFERRED_EXEC_ENABLE = yes
-USER_NAME := naginata_v15
