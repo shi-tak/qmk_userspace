@@ -48,14 +48,14 @@
  [_QWE] = LAYOUT_split_3x6_3_ex2(
    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,     KC_T,   KC_DEL,      KC_ESC,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
    KC_LSFT, KC_A,    KC_S,    KC_D,    KC_F,     KC_G,   KC_LALT,     KC_RGUI, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_RSFT,
-   KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,     KC_B,                         KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_BSLS, KC_RCTL,
+   KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,     KC_B,                         JP_N,    JP_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RCTL,
                               KC_LGUI, MO(_LWR), KC_SPC,                       KC_ENT,  MO(_RS),  KC_RALT
  ),
 
  [_LWR] = LAYOUT_split_3x6_3_ex2(
-   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,     _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
-   _______, KC_LABK, KC_LCBR, KC_LBRC, KC_LPRN, XXXXXXX, _______,     _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX, _______,
-   _______, KC_RABK, KC_RCBR, KC_RBRC, KC_RPRN, XXXXXXX,                       KC_HOME, KC_PGUP, KC_PGDN, KC_END,  XXXXXXX, _______,
+   _______, XXXXXXX, KC_COMM, KC_DOT,  KC_SLSH, XXXXXXX, _______,     _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+   _______, KC_LABK, KC_LCBR, KC_LBRC, KC_LPRN, JP_YEN,  _______,     _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX, _______,
+   _______, KC_RABK, KC_RCBR, KC_RBRC, KC_RPRN, JP_BSLS,                       KC_HOME, KC_PGUP, KC_PGDN, KC_END,  XXXXXXX, _______,
                               _______, _______, _______,                       _______, _______, _______
  ),
 
@@ -69,7 +69,7 @@
  [_ADJ] =  LAYOUT_split_3x6_3_ex2(
   _______, NGSW_LNX, NGSW_MAC, NGSW_WIN, NG_TAYO, NG_SHOS, QK_BOOT,     _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______,
   _______, KC_SCLN,  KC_INS,   KC_PSCR,  KC_SCRL, KC_NUM,  _______,     _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______,
-  _______, JP_KANA,  JP_ZKHK,  JP_MHEN,  JP_HENK, KC_CAPS,                       KC_F11,  KC_F12,  KC_COMM, KC_DOT,  KC_BSLS, _______,
+  _______, JP_KANA,  JP_ZKHK,  JP_MHEN,  JP_HENK, KC_CAPS,                       KC_F11,  KC_F12,  XXXXXXX, XXXXXXX, XXXXXXX, _______,
                                _______,  _______, _______,                       _______, _______, _______
  ),
 
@@ -129,8 +129,8 @@
 
  void keyboard_post_init_user(void) {
      // 薙刀式
-     uint16_t ngonkeys[]  = {KC_H, KC_J};
-     uint16_t ngoffkeys[] = {KC_F, KC_G};
+     uint16_t ngonkeys[]  = {JP_H, JP_J};
+     uint16_t ngoffkeys[] = {JP_F, JP_G};
      set_naginata(_NAGINATA, ngonkeys, ngoffkeys);
      // 薙刀式
      
